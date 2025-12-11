@@ -9,7 +9,29 @@
     window.onload = function () {
       var deeplink = "tesla://charging_home_screen";
 
+      var playStore = "https://play.google.com/store/apps/details?id=com.teslamotors.tesla";
+      var appStore  = "https://apps.apple.com/app/id582007913";
+
+      var isAndroid = /Android/i.test(navigator.userAgent);
+      var isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+      var start = Date.now();
+
       window.location.href = deeplink;
+
+      setTimeout(function () {
+        var elapsed = Date.now() - start;
+
+        if (elapsed < 1500) {
+          if (isAndroid) {
+            window.location.href = playStore;
+          } else if (isIOS) {
+            window.location.href = appStore;
+          } else {
+            window.location.href = "https://www.tesla.com/app";
+          }
+        }
+      }, 800);
     };
   </script>
 </head>
